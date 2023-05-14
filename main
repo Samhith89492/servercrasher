@@ -42,16 +42,21 @@ local ChatAdded = Scroller.ChildAdded:Connect(function(x)
     end
 end)
 -- CRASHER --
-while true do
-task.wait()
-local Message = "⛓"
-local Unicode = " "
-Message = Message .. Unicode:rep(200 - #Message)
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local SayMessageRequest = ReplicatedStorage:FindFirstChild("SayMessageRequest", true)
-	if SayMessageRequest then
-		for i = 1, 7 do
-			SayMessageRequest:FireServer(Message, "All")
-		end
-	end
-end)
+getgenv().Crasher = true
+if not getgenv().Crasher then
+    break
+while getgenv().Crasher do
+    task.wait()
+    local Message = "⛓"
+    local Unicode = " "
+    Message = Message .. Unicode:rep(200 - #Message)
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local SayMessageRequest = ReplicatedStorage:FindFirstChild("SayMessageRequest", true)
+    if SayMessageRequest then
+        for i = 1, 7 do
+            SayMessageRequest:FireServer(Message, "All")
+        end
+    end
+    task.wait()
+    end
+end
